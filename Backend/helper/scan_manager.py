@@ -456,9 +456,33 @@ class ScanManager:
             LOGGER.warning(f"[ScanManager] Dup-check error msg {msg_id}: {e}")
 
         try:
-            metadata_info = await metadata(clean_filename(title), channel_int, msg_id)
+            encoded_string = await encode_string({"chat_id": channel_int, "msg_id": msg_id})
+            display_title = title.rsplit(".", 1)[0] if title and "." in title else (title or f"video_{msg_id}")
+            metadata_info = {
+                "tmdb_id": None,
+                "imdb_id": None,
+                "title": display_title,
+                "genres": [],
+                "description": "",
+                "rating": None,
+                "release_year": None,
+                "poster": "",
+                "backdrop": "",
+                "logo": "",
+                "cast": [],
+                "runtime": None,
+                "media_type": "movie",
+                "telegram": [{
+                    "quality": "Personal",
+                    "id": encoded_string,
+                    "name": title or f"video_{msg_id}.mp4",
+                    "size": size,
+                }],
+                "group_key": None,
+                "part_number": None,
+            }
         except Exception as e:
-            LOGGER.warning(f"[ScanManager] Metadata exception for msg {msg_id}: {e}")
+            LOGGER.warning(f"[ScanManager] Error building metadata for msg {msg_id}: {e}")
             metadata_info = None
 
         if metadata_info is None:
