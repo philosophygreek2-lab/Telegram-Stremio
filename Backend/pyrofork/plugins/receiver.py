@@ -16,7 +16,6 @@ from Backend.logger import LOGGER
 file_queue = Queue()
 db_lock = Lock()
 
-
 def _is_supported_media(message: Message) -> bool:
     if message.video:
         return True
@@ -26,18 +25,15 @@ def _is_supported_media(message: Message) -> bool:
             return True
     return False
 
-
 def _is_manual_channel(chat_id) -> bool:
     target = str(chat_id).replace("-100", "")
     return any(str(c).strip().replace("-100", "") == target for c in SettingsManager.current().manual_channels)
-
 
 def _extract_fields(message: Message):
     file = message.video or message.document
     title = file.file_name or f"video_{message.id}.mp4"
     channel = str(message.chat.id).replace("-100", "")
     return file, title, message.id, file.file_size, get_readable_file_size(file.file_size), channel
-
 
 async def process_file():
     while True:
@@ -50,9 +46,7 @@ async def process_file():
                 LOGGER.info("Save failed.")
         file_queue.task_done()
 
-
 create_task(process_file())
-
 
 @Client.on_message(filters.channel & (filters.document | filters.video))
 async def file_receive_handler(client: Client, message: Message):
@@ -73,7 +67,7 @@ async def file_receive_handler(client: Client, message: Message):
 
         encoded_string = await encode_string({"chat_id": int(channel), "msg_id": msg_id})
 
-                metadata_info = {
+        metadata_info = {
             "tmdb_id": None,
             "imdb_id": None,
             "title": display_title,
@@ -103,7 +97,6 @@ async def file_receive_handler(client: Client, message: Message):
         await asleep(e.value)
     except Exception as e:
         LOGGER.error(f"Error handling file {message.id}: {e}")
-
 
 @Client.on_deleted_messages(filters.channel)
 async def file_deleted_handler(client: Client, messages: list[Message]):
