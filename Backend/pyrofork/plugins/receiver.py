@@ -73,26 +73,25 @@ async def file_receive_handler(client: Client, message: Message):
 
         encoded_string = await encode_string({"chat_id": int(channel), "msg_id": msg_id})
 
-        metadata_info = {
+                metadata_info = {
             "tmdb_id": None,
             "imdb_id": None,
             "title": display_title,
             "genres": [],
             "description": "",
-            "rating": None,
-            "release_year": None,
+            "rate": None,
+            "year": None,
             "poster": "",
             "backdrop": "",
             "logo": "",
             "cast": [],
             "runtime": None,
             "media_type": "movie",
-            "telegram": [{
-                "quality": "Personal",
-                "id": encoded_string,
-                "name": title,
-                "size": size,
-            }],
+            "quality": "Personal",
+            "encoded_string": encoded_string,
+            "is_anime": False,
+            "original_language": None,
+            "origin_country": [],
             "group_key": None,
             "part_number": None,
         }
