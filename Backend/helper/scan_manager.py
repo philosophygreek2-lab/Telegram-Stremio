@@ -458,28 +458,28 @@ class ScanManager:
         try:
             encoded_string = await encode_string({"chat_id": channel_int, "msg_id": msg_id})
             display_title = title.rsplit(".", 1)[0] if title and "." in title else (title or f"video_{msg_id}")
-            metadata_info = {
-                "tmdb_id": None,
-                "imdb_id": None,
-                "title": display_title,
-                "genres": [],
-                "description": "",
-                "rate": None,
-                "year": None,
-                "poster": "",
-                "backdrop": "",
-                "logo": "",
-                "cast": [],
-                "runtime": None,
-                "media_type": "movie",
-                "quality": "Personal",
-                "encoded_string": encoded_string,
-                "is_anime": False,
-                "original_language": None,
-                "origin_country": [],
-                "group_key": None,
-                "part_number": None,
-            }
+                    metadata_info = {
+            "tmdb_id": msg_id,
+            "imdb_id": f"pv{channel_int}_{msg_id}",
+            "title": display_title,
+            "genres": ["Personal"],
+            "description": "",
+            "rate": None,
+            "year": None,
+            "poster": "",
+            "backdrop": "",
+            "logo": "",
+            "cast": [],
+            "runtime": None,
+            "media_type": "movie",
+            "quality": "Personal",
+            "encoded_string": encoded_string,
+            "is_anime": False,
+            "original_language": None,
+            "origin_country": [],
+            "group_key": None,
+            "part_number": None,
+        }
         except Exception as e:
             LOGGER.warning(f"[ScanManager] Error building metadata for msg {msg_id}: {e}")
             metadata_info = None
