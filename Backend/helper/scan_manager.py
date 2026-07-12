@@ -460,7 +460,7 @@ class ScanManager:
             display_title = title.rsplit(".", 1)[0] if title and "." in title else (title or f"video_{msg_id}")
             metadata_info = {
             "tmdb_id": msg_id,
-            "imdb_id": f"pv{channel_int}_{msg_id}",
+            "imdb_id": f"tg{msg_id}",
             "title": display_title,
             "genres": ["Personal"],
             "description": "",
