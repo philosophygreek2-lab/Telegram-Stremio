@@ -69,7 +69,7 @@ async def file_receive_handler(client: Client, message: Message):
 
         metadata_info = {
             "tmdb_id": msg_id,
-            "imdb_id": f"pv{channel}_{msg_id}",
+            "imdb_id": f"tg{msg_id}",
             "title": display_title,
             "genres": ["Personal"],
             "description": "",
