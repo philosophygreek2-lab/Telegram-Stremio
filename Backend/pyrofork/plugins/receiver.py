@@ -67,9 +67,9 @@ async def file_receive_handler(client: Client, message: Message):
 
         encoded_string = await encode_string({"chat_id": int(channel), "msg_id": msg_id})
 
-                metadata_info = {
+        metadata_info = {
             "tmdb_id": msg_id,
-            "imdb_id": f"pv{channel_int}_{msg_id}",
+            "imdb_id": f"pv{channel}_{msg_id}",
             "title": display_title,
             "genres": ["Personal"],
             "description": "",
