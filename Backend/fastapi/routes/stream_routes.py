@@ -5,7 +5,7 @@ import secrets
 import time
 from collections import deque
 from typing import Dict
-from urllib.parse import unquote
+from urllib.parse import quote, unquote
 
 from fastapi import APIRouter, Depends, HTTPException, Request
 from fastapi.responses import JSONResponse
