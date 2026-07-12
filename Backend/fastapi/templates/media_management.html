@@ -259,7 +259,7 @@
     const title = item.title || item.name || 'Unknown Title';
     const year = item.release_year || 'Unknown Year';
     const rating = item.rating ? `⭐ ${parseFloat(item.rating).toFixed(1)}` : '';
-    const poster = item.poster || 'https://via.placeholder.com/300x450/e5e7eb/9ca3af?text=No+Image';
+    const poster = item.poster || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='450' viewBox='0 0 300 450'%3E%3Crect width='300' height='450' fill='%23e5e7eb'/%3E%3Ctext x='150' y='225' font-family='sans-serif' font-size='20' fill='%239ca3af' text-anchor='middle' dominant-baseline='middle'%3ENo Image%3C/text%3E%3C/svg%3E";
 
     // Escape title for data attribute safety
     const safeTitle = title.replace(/"/g, '&quot;');
@@ -267,7 +267,7 @@
     return `
         <div class="group overflow-hidden rounded-3xl glass-panel border border-hairline hover:border-primary/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
             <div class="relative overflow-hidden">
-                <img src="${poster}" alt="${title}" class="w-full aspect-[2/3] object-cover transition duration-300 group-hover:scale-105" onerror="this.src='https://via.placeholder.com/300x450/e5e7eb/9ca3af?text=No+Image'" loading="lazy">
+                <img src="${poster}" alt="${title}" class="w-full aspect-[2/3] object-cover transition duration-300 group-hover:scale-105" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'450\' viewBox=\'0 0 300 450\'%3E%3Crect width=\'300\' height=\'450\' fill=\'%23e5e7eb\'/%3E%3Ctext x=\'150\' y=\'225\' font-family=\'sans-serif\' font-size=\'20\' fill=\'%239ca3af\' text-anchor=\'middle\' dominant-baseline=\'middle\'%3ENo Image%3C/text%3E%3C/svg%3E'" loading="lazy">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                 <div class="absolute top-3 left-3">
