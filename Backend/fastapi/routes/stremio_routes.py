@@ -199,50 +199,7 @@ async def get_manifest(token: str, token_data: dict = Depends(verify_token)):
         catalogs = []
     else:
         resources = ["catalog", "meta", "stream"]
-        catalogs = [
-            {
-                "type": "movie",
-                "id": "latest_movies",
-                "name": "Latest",
-                "extra": [
-                    {"name": "genre", "isRequired": False, "options": GENRES},
-                    {"name": "skip"}
-                ],
-                "extraSupported": ["genre", "skip"]
-            },
-            {
-                "type": "movie",
-                "id": "top_movies",
-                "name": "Popular",
-                "extra": [
-                    {"name": "genre", "isRequired": False, "options": GENRES},
-                    {"name": "skip"},
-                    {"name": "search", "isRequired": False}
-                ],
-                "extraSupported": ["genre", "skip", "search"]
-            },
-            {
-                "type": "series",
-                "id": "latest_series",
-                "name": "Latest",
-                "extra": [
-                    {"name": "genre", "isRequired": False, "options": GENRES},
-                    {"name": "skip"}
-                ],
-                "extraSupported": ["genre", "skip"]
-            },
-            {
-                "type": "series",
-                "id": "top_series",
-                "name": "Popular",
-                "extra": [
-                    {"name": "genre", "isRequired": False, "options": GENRES},
-                    {"name": "skip"},
-                    {"name": "search", "isRequired": False}
-                ],
-                "extraSupported": ["genre", "skip", "search"]
-            }
-        ]
+        catalogs = []
 
         try:
             custom_catalogs = await db.get_custom_catalogs()
