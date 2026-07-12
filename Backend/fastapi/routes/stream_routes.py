@@ -148,9 +148,11 @@ def _resolve_filename_mime(file_id):
 
 #----- Build the shared streaming response headers and status code
 def _build_stream_headers(mime_type, file_name, req_length, range_header, start, end, file_size):
+    ascii_fallback = file_name.encode("ascii", "ignore").decode("ascii").strip() or "video"
+    encoded_name = quote(file_name)
     headers = {
         "Content-Type": mime_type,
-        "Content-Disposition": f'inline; filename="{file_name}"',
+        "Content-Disposition": f"inline; filename=\"{ascii_fallback}\"; filename*=UTF-8''{encoded_name}",
         "Accept-Ranges": "bytes",
         "Content-Length": str(req_length),
         "Cache-Control": "public, max-age=3600",
